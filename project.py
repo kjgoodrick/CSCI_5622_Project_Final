@@ -3,7 +3,7 @@ from matplotlib import pyplot as plt
 import cartopy.crs as ccrs
 import cartopy
 
-def plt_ant_feat(z, x=None, y=None, fig=None, ax=None, cmap='gist_rainbow', vmin=None, vmax=None, label='', title='', kwargs_mesh={}, kwargs_cbar={}):
+def plt_ant_feat(z, x=None, y=None, fig=None, ax=None, cmap='jet', vmin=20, vmax=135, label='', title='', kwargs_mesh={'shading':'gouraud', 'aa':True}, kwargs_cbar={}):
     if x is None or y is None:
         x = np.linspace(-179.5, 179.5, 360)
         y = np.linspace(-60.5, -89.5, 30)
