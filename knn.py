@@ -1,6 +1,6 @@
 from joblib import load
 
-key = 'knn'
+key = 'k-NN'
 
 best_sfs = load('models/best_sfs.joblib')
 knn = best_sfs.estimator

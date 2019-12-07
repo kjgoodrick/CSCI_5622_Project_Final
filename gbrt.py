@@ -1,6 +1,8 @@
 import pickle
 
+import numpy as np
 import pandas as pd
+import matplotlib.pylab as plt
 
 
 CATEGORICAL_FEATURES = {
@@ -11,7 +13,6 @@ CATEGORICAL_FEATURES = {
 key = 'GBRT'
 with open('models/gbrt.pickle', 'rb') as _f:
     model = pickle.load(_f)
-
 
 def _load_data_set(path=None, data=None):
     """
@@ -41,3 +42,24 @@ def pred(X):
     pred = model.predict(X_test)
 
     return pred
+
+def plot_features(X):
+    X_test = _load_data_set(data=X)
+    for key in ['lon', 'lat', 'ghf']:
+        if key in X_test:
+            X_test.drop(key, axis=1, inplace=True)
+    
+    labels = X_test.columns.values
+    labels = labels[0:17]
+    labels[16] = 'upper_mantle_vel_structure'
+
+    imp = model.feature_importances_
+    imp[16] = np.sum(imp[16:])
+    imp = imp[0:17]
+    imp = (imp-np.min(imp))/(np.max(imp) - np.min(imp))
+
+    sort_i = np.argsort(imp)
+
+    fig, ax = plt.subplots()
+    plt.title('Feature Importance (GBRT)')
+    plt.barh(labels[sort_i], imp[sort_i])

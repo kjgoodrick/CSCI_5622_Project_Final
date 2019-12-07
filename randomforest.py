@@ -21,6 +21,8 @@ def pred(X):
 
 def plot_features():
     sort_i = np.argsort(rf.feature_importances_)
+    imp = rf.feature_importances_
+    imp = (imp-np.min(imp))/(np.max(imp) - np.min(imp))
     fig, ax = plt.subplots()
-    plt.title('Feature Importance')
-    plt.barh(X_train.columns.values[sort_i], rf.feature_importances_[sort_i])
+    plt.title('Feature Importance (Random Forest)')
+    plt.barh(X_train.columns.values[sort_i], imp[sort_i])
