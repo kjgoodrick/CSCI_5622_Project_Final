@@ -43,7 +43,7 @@ def pred(X):
 
     return pred
 
-def plot_features(X):
+def feature_importances(X):
     X_test = _load_data_set(data=X)
     for key in ['lon', 'lat', 'ghf']:
         if key in X_test:
@@ -58,8 +58,5 @@ def plot_features(X):
     imp = imp[0:17]
     imp = (imp-np.min(imp))/(np.max(imp) - np.min(imp))
 
-    sort_i = np.argsort(imp)
-
-    fig, ax = plt.subplots()
-    plt.title('Feature Importance (GBRT)')
-    plt.barh(labels[sort_i], imp[sort_i])
+    sort_i = np.argsort(labels)
+    return labels[sort_i], imp[sort_i]
