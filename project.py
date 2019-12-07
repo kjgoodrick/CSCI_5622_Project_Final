@@ -2,7 +2,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 import cartopy.crs as ccrs
 import cartopy
-from mpl_toolkits.basemap import maskoceans
+# from mpl_toolkits.basemap import maskoceans
 from shapely.ops import cascaded_union
 
 artic_poly = cartopy.feature.NaturalEarthFeature('physical', 'antarctic_ice_shelves_polys', '10m')
