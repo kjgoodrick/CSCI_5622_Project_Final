@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import matplotlib.pylab as plt
 from sklearn.ensemble import RandomForestRegressor
 
 key = 'Random Forest'
@@ -17,3 +18,9 @@ rf.fit(X_train, y_train)
 def pred(X):
     X = X.drop(['lon', 'lat'], axis=1)
     return rf.predict(X)
+
+def plot_features():
+    sort_i = np.argsort(rf.feature_importances_)
+    fig, ax = plt.subplots()
+    plt.title('Feature Importance')
+    plt.barh(X_train.columns.values[sort_i], rf.feature_importances_[sort_i])
