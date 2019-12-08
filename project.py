@@ -13,7 +13,7 @@ artic_polys = list(artic_poly.geometries())
 artic_polys = cascaded_union(artic_polys)
 ocean_polys = cascaded_union(list(ocean_poly.geometries()))
 
-def plt_ant_feat(z, x=None, y=None, fig=None, ax=None, cmap='gist_rainbow_r', vmin=20, vmax=120, hide_water=True, ups=False,  label='', title='', kwargs_mesh={'shading':'gouraud', 'aa':True}, kwargs_cbar={}):
+def plt_ant_feat(z, x=None, y=None, fig=None, ax=None, cmap='gist_rainbow_r', vmin=20, vmax=120, hide_water=True, ups=False, colorbar=True, label='', title='', kwargs_mesh={'shading':'gouraud', 'aa':True}, kwargs_cbar={}):
     if x is None or y is None:
         x = np.linspace(-179.5, 179.5, 360)
         y = np.linspace(-60.5, -89.5, 30)
@@ -36,8 +36,10 @@ def plt_ant_feat(z, x=None, y=None, fig=None, ax=None, cmap='gist_rainbow_r', vm
         mesh = ax.scatter(x, y, c=z, cmap=cmap, vmin=vmin, vmax=vmax)
     else:
         mesh = ax.pcolormesh(x, y, z, cmap=cmap, vmin=vmin, vmax=vmax, transform=ccrs.PlateCarree(), **kwargs_mesh)
-    cb = plt.colorbar(mesh, ax=ax, **kwargs_cbar)
-    cb.set_label(label)
+    
+    if colorbar:
+        cb = plt.colorbar(mesh, ax=ax, **kwargs_cbar)
+        cb.set_label(label)
     ax.set_title(title)
     
-    return
+    return mesh
