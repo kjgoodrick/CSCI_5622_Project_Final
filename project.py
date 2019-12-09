@@ -26,12 +26,12 @@ def plt_ant_feat(z, x=None, y=None, fig=None, ax=None, cmap='gist_rainbow_r', vm
     if ax is None:
         ax = plt.subplot(1, 1, 1, projection=ccrs.SouthPolarStereo())
     
-    ax.set_extent([-180, 180, -90, -60], ccrs.PlateCarree())
+    ax.set_extent([-180, 180, -90, -65], ccrs.PlateCarree())
     ax.add_feature(cartopy.feature.COASTLINE, lw=1)
     ax.add_feature(cartopy.feature.NaturalEarthFeature('physical', 'antarctic_ice_shelves_polys', '10m'),facecolor='none', edgecolor='black')
     if hide_water:
         ax.add_geometries(ocean_polys.symmetric_difference(artic_polys), ccrs.PlateCarree(), facecolor='w', edgecolor=None)
-        ax.add_feature(cartopy.feature.NaturalEarthFeature('physical', 'antarctic_ice_shelves_polys', '10m'), facecolor='none', edgecolor='black', lw=1)
+        ax.add_feature(cartopy.feature.NaturalEarthFeature('physical', 'antarctic_ice_shelves_polys', '10m'), facecolor='none')
     if ups:
         mesh = ax.scatter(x, y, c=z, cmap=cmap, vmin=vmin, vmax=vmax)
     else:
